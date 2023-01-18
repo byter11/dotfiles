@@ -4,7 +4,7 @@ set -e
 
 WALLPAPER_DIR="$HOME/wallpapers"
 URI="https://www.reddit.com/r/$1/hot.json?limit=100"
-DESKTOP_PATH="$HOME/"
+DESKTOP_PATH="$HOME"
 
 if [ -z "$1" ]; then
 	echo "Usage: reddit <subreddit_name>"

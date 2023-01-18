@@ -22,6 +22,7 @@ export PATH=$ANDROID_HOME/platform-tools:/home/mohsin/.local/bin:$PATH
 alias protonc="protonvpn-cli c --fastest --protocol tcp"
 alias protond="protonvpn-cli d"
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias idea='_JAVA_AWT_WM_NONREPARENTING=1 idea'
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME

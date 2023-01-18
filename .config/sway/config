@@ -18,7 +18,7 @@ set $term xfce4-terminal
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | /home/mohsin/bin/dmenu_run_history | xargs swaymsg exec --
+set $menu dmenu_path | $HOME/.local/bin/dmenu_run_history | xargs swaymsg exec --
 
 ### Output configuration
 #
@@ -241,7 +241,7 @@ bindsym $mod+grave [app_id="xfce4-terminal"] scratchpad show, resize set 1000 60
 bindsym $mod+backslash [app_id="xfce4-terminal"] scratchpad show, resize set 1000 600, move position center
 
 bindsym $mod+Alt+l exec swaylock -c 191A19
-bindsym $mod+u exec "/home/mohsin/.local/bin/keepmenu"
+bindsym $mod+u exec keepmenu
 
 # toggle laptop screen 
 bindsym $mod+Shift+m output eDP-1 toggle
