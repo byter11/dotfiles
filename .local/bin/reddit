@@ -1,0 +1,36 @@
+#!/bin/zsh
+set -e
+
+
+WALLPAPER_DIR="$HOME/wallpapers"
+URI="https://www.reddit.com/r/$1/hot.json?limit=100"
+DESKTOP_PATH="$HOME/"
+
+if [ -z "$1" ]; then
+	echo "Usage: reddit <subreddit_name>"
+	exit
+fi
+
+if [ "$1" = 'rm' ]; then
+	rm $(cat $HOME/.reddit)
+	echo rm: $(cat $HOME/.reddit)
+	rm $HOME/.reddit
+	exit
+fi
+
+USERAGENT="Mozilla/5.0 (X11; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0"
+
+IMAGES=$(curl -H "User-Agent: $USERAGENT" -s $URI   | jq '.data.children' | jq '.[] | .data.url+"-"+.data.title' | grep -E "(jpe?g|png)" | awk -F'-' '{match($2, "[0-9]*\\s?x\\s?[0-9]*"); size=substr($2, RSTART, RLENGTH); sub(/\s*x\s*/, " ", size); print $1" "size}' | awk '(NF<3){print}; (NF==3){if ($2>$3) print $1}' | sed 's/\"*//g')
+
+echo from: $IMAGES
+
+IMGURL=$(echo $IMAGES | sort -R | head -1 | sed 's/\s*//g')
+
+echo in: $IMGURL
+IMGFILE=$WALLPAPER_DIR/$(printf "%s\n" "${IMGURL##*/}")
+echo out: $IMGFILE
+curl $IMGURL -o $IMGFILE
+
+chwall $IMGFILE
+
+echo $IMGFILE > $DESKTOP_PATH/.reddit
